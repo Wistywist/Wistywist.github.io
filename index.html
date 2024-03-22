@@ -65,7 +65,13 @@
             client.onMessageArrived = onMessageArrived;
 
             client.connect({
-                onSuccess: onConnect,
+                onSuccess: function () {
+                    console.log("Connected to MQTT broker");
+                    document.getElementById("status").innerText = "Connected to MQTT broker";
+                    // Subscribe to the topic
+                    var topic = getTopic(); // Get the topic
+                    client.subscribe(topic); // Subscribe to the topic
+                    },
                 onFailure: onFailure,
                 useSSL: true
             });
